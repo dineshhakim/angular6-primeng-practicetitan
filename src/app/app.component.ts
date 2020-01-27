@@ -1,47 +1,22 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./app.component.css']
+ 
 })
 export class AppComponent {
-  name = 'Angular';
+ 
+   
+   name = 'Set iframe source';
+  url: string = "http://titanreport-uat.12thwonder.com/document/edit/953dc96d-bc8b-419f-a5e8-8ea06c5a58b4";
+  urlSafe: SafeResourceUrl;
 
-  colors: [
-            {label: 'Red', value: '#ff0000'},
-            {label: 'Green', value: '#00ff00'},
-            {label: 'Yellow', value: '#FFFF00'}           
-        ];
-  selectedColor: any;
-  constructor(private messageService: MessageService) {  
-   this.colors= [
-            {label: 'Red', value: '#ff0000'},
-            {label: 'Green', value: '#00ff00'},
-            {label: 'Yellow', value: '#FFFF00'}           
-        ];
-    this.selectedColor=this.colors[0].value;   
-    console.log(this.selectedColor);
-  }
-   onChange(value){
-    //  console.log(value);
-    //   this.selectedColor = value;
-  }
+  constructor(public sanitizer: DomSanitizer) { }
 
-  addSingle() {
-    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
-  }
-
-  addMultiple() {
-    this.messageService.addAll(
-      [
-        { severity: 'success', summary: 'Service Message', detail: 'Via MessageService' },
-    { severity: 'info', summary: 'Info Message', detail: 'Via MessageService' }]);
-  }
-
-  clear() {
-    this.messageService.clear();
+  ngOnInit() {
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 }
