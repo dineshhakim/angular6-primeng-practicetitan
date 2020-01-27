@@ -1,0 +1,26 @@
+<p>
+  Start editing to see some magic happen :)
+</p>
+
+<!-- <p-toast></p-toast>
+
+
+<p-button (click)="addSingle()" label="Dash"></p-button>
+<p-button (click)="addMultiple()" label="Multi"></p-button>
+<p-button (click)="clear()" label="Clearll"></p-button>
+
+
+<p-button icon="pi pi-check" iconPos="right" label="Click"></p-button>
+<p-button icon="pi pi-check"></p-button> -->
+
+
+
+<p-dropdown [options]="colors" [(ngModel)]="selectedColor" [ngStyle]="{'background-color':selectedColor}">   
+    <ng-template let-color pTemplate="item">
+         <div class="ui-helper-clearfix">   
+            <div [ngStyle]="{'background-color':color.value ,'color': color.value} " style="float:left;">Test</div>        
+            <div style="float:right">{{color.label}}</div>
+        </div>
+    </ng-template>
+</p-dropdown>
+{{selectedColor}}
